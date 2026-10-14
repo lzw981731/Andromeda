@@ -15,52 +15,52 @@ struct WelcomeView: View {
     @StateObject private var appSettings = AppSettings()
     var body: some View {
         List {
-            Section(header: Text("Setup")) {
+            Section(header: Text("初始设置")) {
                 Text("Welcome to Andromeda, a powerful iOS toolbox for TrollStore. Simulate your location with joystick & routes, manage daemons, clean storage with detailed reports, and more. Developed by son3ra1n.")
             }
             if getDeviceCode() == "iPhone8,4" {
-                Section(header: Text("Hi ! SE 1 User")) {
+                Section(header: Text("嗨！SE 1 用户")) {
                     Text("It looks like you are using the app on an iPhone SE 2016 (1st gen). You might encounter serious UI issues. Please excuse me in advance.")
                 }
             }
-            Section(header: Text("Log Collection")) {
+            Section(header: Text("日志收集")) {
                 Text("We collect some logs that are uploaded to our server for fixing bugs and adressing crash logs. The logs never contains any of your personal information, just your device type and the crash log itself. We also collect measurement information to see what was the most used in the app. You can choose if you want to prevent ANY data from being sent to our server.")
                 Toggle(isOn: $loggingAllowed) {
-                    Text("Enable log collection")
+                    Text("开启日志收集")
                 }
                 .onChange(of: loggingAllowed) { newValue in
                     if !loggingAllowed {
-                        UIApplication.shared.alert(title: "Warning", body: "Disabling logging might make things more difficult for developers if you have an issue.")
+                        UIApplication.shared.alert(title: "警告", body: "Disabling logging might make things more difficult for developers if you have an issue.")
                     }
                 }
             }
             
-            Section(header: Text("Update Warnings")) {
+            Section(header: Text("更新提醒")) {
                 Text("When a new update is published, you will receive a pop-up on app launch asking you if you want to update. You can prevent this from hapenning")
                 Toggle(isOn: $updBypass) {
-                    Text("Disable update pop-up")
+                    Text("关闭更新弹窗")
                 }
             }
             
-            Section(header: Text("Cleaner File Sizes")) {
+            Section(header: Text("清理文件大小")) {
                 Text("This is an issue that might incorrectly set permissions when calculating file sizes for your device.")
                 Toggle(isOn: $appSettings.getSizes) {
-                    Text("Calculate File Size")
+                    Text("计算文件大小")
                 }
             }
             if !updBypass {
-                Section(header: Text("WARNING")) {
+                Section(header: Text("警告")) {
                     Text("If you want to enable auto-update, you need to turn on Magnifier URL Scheme in TrollStore.")
-                    Text("1. Open TrollStore")
-                    Text("2. Go to Settings")
-                    Text("3. Enable URL Scheme")
+                    Text("1. 打开 TrollStore")
+                    Text("2. 前往“设置”")
+                    Text("3. 开启 URL Scheme")
                 }
             }
         }
-        .navigationTitle("Welcome!")
+        .navigationTitle("欢迎！")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Dismiss") {
+                Button("忽略") {
                     close()
                 }
             }

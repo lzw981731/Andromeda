@@ -13,12 +13,12 @@ struct ContentView: View {
         TabView(selection: $defaultTab) {
             HomeView()
                 .tabItem {
-                    Label("Home", systemImage: "house.fill")
+                    Label("主页", systemImage: "house.fill")
                 }
                 .tag(1)
             DaemonView()
                 .tabItem {
-                    Label("Daemons", systemImage: "flag.fill")
+                    Label("守护进程", systemImage: "flag.fill")
                 }
                 .tag(2)
                 .onAppear {
@@ -26,17 +26,17 @@ struct ContentView: View {
                 }
             LocSimView()
                 .tabItem {
-                    Label("LocSim", systemImage: "mappin")
+                    Label("虚拟定位", systemImage: "mappin")
                 }
                 .tag(3)
             CleanerView()
                 .tabItem {
-                    Label("Cleaner", systemImage: "trash.fill")
+                    Label("清理", systemImage: "trash.fill")
                 }
                 .tag(4)
             SuperviseView()
                 .tabItem {
-                    Label("Supervise", systemImage: "checkmark.seal.fill")
+                    Label("监管", systemImage: "checkmark.seal.fill")
                 }
                 .tag(5)
         }

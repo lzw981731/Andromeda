@@ -47,21 +47,21 @@ struct HomeView: View {
                         
                         // MARK: - Feature Stats Card
                         HStack(spacing: 15) {
-                            statItem(title: "Status", value: "Verified", icon: "checkmark.shield.fill", color: .green)
-                            statItem(title: "Version", value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?")-Pro", icon: "cpu", color: .indigo)
+                            statItem(title: "状态", value: "已验证", icon: "checkmark.shield.fill", color: .green)
+                            statItem(title: "版本", value: "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?")-Pro", icon: "cpu", color: .indigo)
                         }
                         .padding(.horizontal)
                         
                         // MARK: - Main Actions
                         VStack(spacing: 12) {
-                            Text("CREDITS & CONTRIBUTORS")
+                            Text("致谢与贡献者")
                                 .font(.system(size: 12, weight: .bold))
                                 .foregroundColor(.secondary)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 10)
                             
                             VStack(spacing: 1) {
-                                creditRow(name: "son3ra1n", role: "Main Developer", image: "https://github.com/son3ra1n.png")
+                                creditRow(name: "son3ra1n", role: "主要开发者", image: "https://github.com/son3ra1n.png")
                             }
                             .glassCard()
                         }
@@ -71,7 +71,7 @@ struct HomeView: View {
                         Button(action: { respring() }) {
                             HStack {
                                 Image(systemName: "restart.circle.fill")
-                                Text("Respring Device")
+                                Text("注销设备")
                             }
                             .font(.headline)
                             .foregroundColor(.white)
