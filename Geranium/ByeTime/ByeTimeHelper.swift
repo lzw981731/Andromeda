@@ -81,14 +81,14 @@ func DisableScreenTime(screentimeagentd: Bool, usagetrackingd: Bool, homed: Bool
         daemonManagement(key: "com.apple.familycircled", value: true, plistPath: "/var/db/com.apple.xpc.launchd/disabled.plist")
     }
     successVibrate()
-    UIApplication.shared.alert(title:"Done !", body:"Please manually reboot your device", withButton: false)
+    UIApplication.shared.alert(title:"完成！", body:"请手动重启设备", withButton: false)
 }
 
 
 func enableBack() {
     var canIProceed = false
     if !FileManager.default.fileExists(atPath: STBckPath) {
-        UIApplication.shared.confirmAlert(title: "Backup file not found.", body: "Do you want to look for other backup files (Cowabunga or TrollBox) ?", onOK: {
+        UIApplication.shared.confirmAlert(title: "未找到备份文件。", body: "要查找其他备份文件（Cowabunga 或 TrollBox）吗？", onOK: {
             try? FileManager.default.removeItem(atPath: STString)
             if FileManager.default.fileExists(atPath: "/var/mobile/Library/Preferences/live.cclerc.ScreenTimeAgent.plist") {
                 try? FileManager.default.copyItem(atPath: "/var/mobile/Library/Preferences/live.cclerc.ScreenTimeAgent.plist", toPath: STString)
@@ -99,7 +99,7 @@ func enableBack() {
                 doStuff()
             }
             else {
-                UIApplication.shared.confirmAlert(title: "Backup file still not found.", body: "No backup file found. Are you sure you want to proceed ? Old preferences might not be restored.", onOK: {
+                UIApplication.shared.confirmAlert(title: "仍未找到备份文件。", body: "未找到备份文件，确定要继续吗？旧偏好设置可能无法恢复。", onOK: {
                     doStuff()
                 }, noCancel: false, onCancel: {
                     canIProceed = false
@@ -132,16 +132,16 @@ func doStuff() {
     RootHelper.move(from: URL(fileURLWithPath :"/var/mobile/Documents/disabled.plist"), to: URL(fileURLWithPath: "/var/db/com.apple.xpc.launchd/disabled.plist"))
     RootHelper.removeItem(at: URL(fileURLWithPath: "/var/mobile/Documents/disabled.plist"))
     RootHelper.setDaemonPermission(url: URL(fileURLWithPath: "/var/db/com.apple.xpc.launchd/disabled.plist"))
-    UIApplication.shared.alert(title:"Done !", body:"Please manually reboot your device", withButton: false)
+    UIApplication.shared.alert(title:"完成！", body:"请手动重启设备", withButton: false)
 }
 
 func readPlist(atPath path: String) throws -> NSMutableDictionary {
     guard let data = FileManager.default.contents(atPath: path) else {
-        throw NSError(domain: "com.example.plistreader", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to read plist file at path \(path)"])
+        throw NSError(domain: "com.example.plistreader", code: 1, userInfo: [NSLocalizedDescriptionKey: "无法读取路径 \(path) 的 plist 文件"])
     }
 
     guard let plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? NSMutableDictionary else {
-        throw NSError(domain: "com.example.plistreader", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to parse plist data"])
+        throw NSError(domain: "com.example.plistreader", code: 2, userInfo: [NSLocalizedDescriptionKey: "解析 plist 数据失败"])
     }
 
     return plist
@@ -149,7 +149,7 @@ func readPlist(atPath path: String) throws -> NSMutableDictionary {
 
 func removeEntriesFromPlistArray(_ plist: NSMutableDictionary, entriesToRemove: [String], arrayKey: String) {
     guard var array = plist[arrayKey] as? [String] else {
-        print("Array not found in plist for key: \(arrayKey)")
+        print("plist 中未找到键 \(arrayKey) 的数组")
         return
     }
 

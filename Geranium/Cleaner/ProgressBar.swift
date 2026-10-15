@@ -16,7 +16,7 @@ struct ProgressBar: View {
         VStack {
             GeometryReader { geometry in
                 VStack() {
-                    Text("Deleting... \(self.getPercentage(self.value))")
+                    Text("删除中…\(self.getPercentage(self.value))")
                         .padding()
                     ZStack(alignment: .leading) {
                         Rectangle()

@@ -41,7 +41,7 @@ public func getBundleDir(bundleID: String) -> URL {
         dirlist = try fm.contentsOfDirectory(atPath: "/var/mobile/Containers/Data/Application/")
         // print(dirlist)
     } catch {
-        return URL(fileURLWithPath: "Could not access/var/mobile/Containers/Data/Application/.\n\(error.localizedDescription)")
+        return URL(fileURLWithPath: "无法访问 /var/mobile/Containers/Data/Application/。\n\(error.localizedDescription)")
     }
 
     for dir in dirlist {
@@ -58,17 +58,17 @@ public func getBundleDir(bundleID: String) -> URL {
                     returnedurl = URL(fileURLWithPath: "/var/mobile/Containers/Data/Application/").appendingPathComponent(dir)
                 }
             } else {
-                print("WARNING: Directory \(dir) does not have a metadata plist")
+                print("警告：目录 \(dir) 没有 metadata plist")
             }
         } catch {
-            print("Could not get data of \(mmpath): \(error.localizedDescription)")
-            return URL(fileURLWithPath: "Could not get data of \(mmpath): \(error.localizedDescription)")
+            print("无法获取 \(mmpath) 的数据：\(error.localizedDescription)")
+            return URL(fileURLWithPath: "无法获取 \(mmpath) 的数据：\(error.localizedDescription)")
         }
     }
     if returnedurl != URL(string: "none") {
         return returnedurl!
     } else {
-        return URL(fileURLWithPath: "App \(bundleID) cannot be found, is a system app, or is not installed.")
+        return URL(fileURLWithPath: "找不到应用 \(bundleID)，它可能是系统应用或未安装。")
     }
 }
 

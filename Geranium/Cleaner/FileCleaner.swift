@@ -167,7 +167,7 @@ func directorySize(at url: URL) -> Int64 {
             }
         }
     } catch {
-        print("Error calculating folder size: \(error.localizedDescription)")
+        print("计算文件夹大小出错：\(error.localizedDescription)")
     }
 
     return totalSize
@@ -184,6 +184,6 @@ func deleteContentsOfDirectory(atPath path: String) -> String {
     // set perms again else things won't work properly for mobile registered paths
         log = RootHelper.setPermission(url: URL(fileURLWithPath: path))
         print(log)
-        print("Contents of directory \(path) deleted")
+        print("目录 \(path) 的内容已删除")
         return(log2)
 }

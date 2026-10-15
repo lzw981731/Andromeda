@@ -12,29 +12,29 @@ struct DaemonWelcomeView: View {
     var body: some View {
         List {
             
-            Section(header: Text("Purpose")) {
-                Text("By adding some rules to iOS internals, this software prevents the daemon from launching when you boot your phone. The app lists every running daemon, and you can swipe to the left to remove one of them.")
+            Section(header: Text("用途")) {
+                Text("通过向 iOS 内部添加规则，本软件可阻止守护进程在手机启动时运行。应用会列出所有正在运行的守护进程，左滑即可移除。")
             }
             
-            Section(header: Text("WARNING")) {
-                Text("DISABLING SYSTEM DAEMONS IS DANGEROUS. YOU COULD BOOTLOOP YOUR DEVICE. PROCEED WITH CAUTION. I AM NOT RESPONSIBLE FOR ANY PROBLEM ON YOUR DEVICE.")
+            Section(header: Text("警告")) {
+                Text("禁用系统守护进程有风险，可能导致设备无限重启。请谨慎操作，设备出现任何问题本人概不负责。")
                     .foregroundStyle(.red)
             }
-            Section(header: Text("Please note")) {
-                Text("If you want to revert any of your choice, you should go into the manager (list icon next to the apply icon), where you can toggle disabled daemons.")
+            Section(header: Text("请注意")) {
+                Text("如果想撤销某项选择，请进入管理器（应用图标旁的列表图标），在那里可以切换已禁用的守护进程。")
                     .foregroundStyle(.green)
             }
-            Section(header: Text("More info")) {
-                Button("A list of daemons and what they do") {
+            Section(header: Text("更多信息")) {
+                Button("守护进程列表及其作用") {
                     UIApplication.shared.open(URL(string: "https://www.reddit.com/r/jailbreak/comments/10v7j59/tutorial_list_of_ios_daemons_and_what_they_do/")!)
                 }
-                Button("A list of daemons you could disable") {
+                Button("可禁用的守护进程列表") {
                     UIApplication.shared.open(URL(string: "https://www.reddit.com/r/jailbreak/comments/10v7j59/comment/j8s1lgj/")!)
                 }
             }
         }
-        .navigationTitle("Notice")
-        .navigationBarItems(trailing: Button("Understood") {
+        .navigationTitle("注意")
+        .navigationBarItems(trailing: Button("明白了") {
             close()
         })
         .environment(\.defaultMinListRowHeight, 50)

@@ -42,7 +42,7 @@ struct StorageAnalyzerView: View {
                                         .foregroundStyle(
                                             LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing)
                                         )
-                                    Text("Free")
+                                    Text("可用")
                                         .font(.system(size: 12, weight: .semibold))
                                         .foregroundColor(.secondary)
                                 }
@@ -58,7 +58,7 @@ struct StorageAnalyzerView: View {
                         if !isScanning {
                             VStack(spacing: 6) {
                                 HStack {
-                                    Text("Total Storage")
+                                    Text("总存储空间")
                                         .font(.system(size: 13, weight: .semibold))
                                         .foregroundColor(.secondary)
                                     Spacer()
@@ -94,7 +94,7 @@ struct StorageAnalyzerView: View {
                         // Category List
                         if !isScanning {
                             VStack(alignment: .leading, spacing: 12) {
-                                Text("CATEGORIES")
+                                Text("分类")
                                     .font(.system(size: 11, weight: .bold))
                                     .foregroundColor(.secondary)
                                     .padding(.leading, 4)
@@ -116,7 +116,7 @@ struct StorageAnalyzerView: View {
                     .padding(.bottom, 30)
                 }
             }
-            .navigationTitle("Storage")
+            .navigationTitle("存储空间")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 analyzeStorage()
@@ -208,11 +208,11 @@ struct StorageAnalyzerView: View {
                 let otherSize = used - systemSize - appsSize - mediaSize - cachesSize
                 
                 let items: [StorageItem] = [
-                    StorageItem(name: "System", icon: "gearshape.fill", size: max(systemSize, 0), color: .gray),
-                    StorageItem(name: "Apps", icon: "square.grid.2x2.fill", size: max(appsSize, 0), color: .blue),
-                    StorageItem(name: "Media", icon: "photo.fill", size: max(mediaSize, 0), color: .orange),
-                    StorageItem(name: "Caches", icon: "archivebox.fill", size: max(cachesSize, 0), color: .red),
-                    StorageItem(name: "Other", icon: "ellipsis.circle.fill", size: max(otherSize, 0), color: .purple),
+                    StorageItem(name: "系统", icon: "gearshape.fill", size: max(systemSize, 0), color: .gray),
+                    StorageItem(name: "应用", icon: "square.grid.2x2.fill", size: max(appsSize, 0), color: .blue),
+                    StorageItem(name: "媒体", icon: "photo.fill", size: max(mediaSize, 0), color: .orange),
+                    StorageItem(name: "缓存", icon: "archivebox.fill", size: max(cachesSize, 0), color: .red),
+                    StorageItem(name: "其他", icon: "ellipsis.circle.fill", size: max(otherSize, 0), color: .purple),
                 ]
                 
                 DispatchQueue.main.async {

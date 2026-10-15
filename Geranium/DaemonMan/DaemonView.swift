@@ -71,7 +71,7 @@ struct DaemonView: View {
                                 daemonFiles.sort()
                             }
                         } label: {
-                            Label("Enable", systemImage: "hand.thumbsup")
+                            Label("启用", systemImage: "hand.thumbsup")
                         }
                         .tint(.green)
                     }
@@ -82,7 +82,7 @@ struct DaemonView: View {
                                 daemonFiles.sort()
                             }
                         } label: {
-                            Label("Disable", systemImage: "hand.thumbsdown")
+                            Label("禁用", systemImage: "hand.thumbsdown")
                         }
                     }
                 }
@@ -92,7 +92,7 @@ struct DaemonView: View {
         .searchable(text: $searchText)
         .toolbar{
             ToolbarItem(placement: .navigationBarLeading) {
-                Text("Daemons")
+                Text("守护进程")
                     .font(.title2)
                     .bold()
             }
@@ -110,7 +110,7 @@ struct DaemonView: View {
                             isEditing.toggle()
                         }
                         AlertKitAPI.present(
-                            title: "Selected",
+                            title: "已选择",
                             icon: .done,
                             style: .iOS17AppleMusic,
                             haptic: .success
@@ -118,7 +118,7 @@ struct DaemonView: View {
                     }
                 }) {
                     if isEditing {
-                        Text("Done")
+                        Text("完成")
                             .bold()
                     } else {
                         Image(systemName: "pencil")
@@ -128,7 +128,7 @@ struct DaemonView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !isEditing {
                     Toggle(isOn: $isAlphabeticalOrder) {
-                        Label("Alphabetical", systemImage: "textformat")
+                        Label("按字母排序", systemImage: "textformat")
                     }
                 }
             }
@@ -153,7 +153,7 @@ struct DaemonView: View {
                     Button(action: {
                         if toDisable == [] {
                             AlertKitAPI.present(
-                                title: "No Daemon Selected !",
+                                title: "未选择守护进程！",
                                 icon: .error,
                                 style: .iOS17AppleMusic,
                                 haptic: .error
@@ -198,7 +198,7 @@ struct DaemonView: View {
             CurrentlyDisabledDaemonView()
                 .onDisappear {
                     AlertKitAPI.present(
-                        title: "Saved !",
+                        title: "已保存！",
                         icon: .done,
                         style: .iOS17AppleMusic,
                         haptic: .success
@@ -227,7 +227,7 @@ struct DaemonView: View {
                 return label
             }
         } catch {
-            UIApplication.shared.alert(body: "Error reading plist: \(error)")
+            UIApplication.shared.alert(body: "读取 plist 出错：\(error)")
         }
         return nil
     }
@@ -244,7 +244,7 @@ struct DaemonView: View {
         guard let nextDaemon = toDisable.first else {
             if cancelCount != initialcount {
                 RootHelper.removeItem(at: URL(fileURLWithPath: "/var/mobile/Documents/disabled.plist"))
-                UIApplication.shared.alert(title: "Done.", body: "Successfully disabled selected daemons. Please manually reboot your device now.", withButton: false)
+                UIApplication.shared.alert(title: "完成。", body: "已成功禁用所选守护进程，请立即手动重启设备。", withButton: false)
             }
             else {
                 RootHelper.removeItem(at: URL(fileURLWithPath: "/var/mobile/Documents/disabled.plist"))
@@ -254,7 +254,7 @@ struct DaemonView: View {
             return
         }
 
-        UIApplication.shared.confirmAlert(title: "Are you sure you want to disable \(nextDaemon) ?", body: "You can still undo this action after by going to the manager icon.", onOK: {
+        UIApplication.shared.confirmAlert(title: "确定要禁用 \(nextDaemon) 吗？", body: "之后仍可通过管理器图标撤销此操作。", onOK: {
             daemonManagement(key: nextDaemon, value: true, plistPath: "/var/db/com.apple.xpc.launchd/disabled.plist")
             toDisable.removeFirst()
             processNextDaemon()

@@ -16,7 +16,7 @@ func daemonManagement(key: String, value: Bool, plistPath: String) {
     guard let plistData = FileManager.default.contents(atPath: "/var/mobile/Documents/disabled.plist"),
           var plistDictionary = try? PropertyListSerialization.propertyList(from: plistData, options: [], format: nil) as? NSMutableDictionary
     else {
-        print("Error")
+        print("错误")
         return
     }
     plistDictionary[key] = value
@@ -25,10 +25,10 @@ func daemonManagement(key: String, value: Bool, plistPath: String) {
         do {
             try newData.write(to: URL(fileURLWithPath: "/var/mobile/Documents/disabled.plist"))
         } catch {
-            print("Error \(error)")
+            print("错误 \(error)")
         }
     } else {
-        print("Error data convert")
+        print("数据转换错误")
     }
     // we need to do shit with roothelper
     print("roothelper")

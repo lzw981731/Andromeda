@@ -16,31 +16,31 @@ struct ByeTimeView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Label("Screen Time Agent", systemImage: "hourglass"), footer: Text("Screen Time Agent is responsible for managing all of ScreenTime preferences. Disabling this process only might at best disable Screen Time partially.")) {
+                Section(header: Label("Screen Time Agent", systemImage: "hourglass"), footer: Text("Screen Time Agent 负责管理所有屏幕使用时间偏好设置。仅禁用该进程最多只能部分禁用屏幕使用时间。")) {
                     Toggle(isOn: $ScreenTimeAgent) {
-                        Text("Disable Screen Time Agent")
+                        Text("禁用屏幕使用时间代理")
                     }
                     .disabled(!DebugStuff)
                 }
-                Section(header: Label("Usage Tracking Agent", systemImage: "magnifyingglass"), footer: Text("Usage Tracking Agent monitors and reports usage budgets set by Health, Parental Controls (= Screen Time) or Device Management. Disabling this might also disable some other features on your iPhone.")) {
+                Section(header: Label("Usage Tracking Agent", systemImage: "magnifyingglass"), footer: Text("Usage Tracking Agent 负责监控和上报由健康、家长控制（=屏幕使用时间）或设备管理设置的使用额度。禁用它可能还会禁用 iPhone 上的其他功能。")) {
                     Toggle(isOn: $usagetrackingd) {
-                        Text("Disable Usage Tracking Agent")
+                        Text("禁用使用情况跟踪代理")
                     }
                 }
-                Section(header: Label("Homed", systemImage: "homekit"), footer: Text("Homed is in charge of HomeKit accessories and products, for instance HomePods, connected light bulbs and other, that you are managing from the 'Home' app on your phone. Don't disable this if you are using those accessories.")) {
+                Section(header: Label("Homed", systemImage: "homekit"), footer: Text("Homed 负责 HomeKit 配件和产品，例如你在手机“家庭”应用中管理的 HomePod、智能灯泡等。如果你在使用这些配件，请勿禁用。")) {
                     Toggle(isOn: $homed) {
-                        Text("Disable Homed")
+                        Text("禁用 Homed")
                     }
                 }
-                Section(header: Label("Familycircled", systemImage: "figure.and.child.holdinghands"), footer: Text("Familycircled is in charge of iCloud Family system. This includes family subscriptions, so if you disable this you won't be able to use them. However, this can help preventing ScreenTime from working.")) {
+                Section(header: Label("Familycircled", systemImage: "figure.and.child.holdinghands"), footer: Text("Familycircled 负责 iCloud 家人共享系统，包括家人订阅，禁用后将无法使用。但这有助于阻止屏幕使用时间工作。")) {
                     Toggle(isOn: $familycircled) {
-                        Text("Disable Familycircled")
+                        Text("禁用 Familycircled")
                     }
                 }
             }
-            Button("Bye ScreenTime !", action : {
-                UIApplication.shared.confirmAlert(title: "You are about to disable those daemons.", body: "This will delete Screen Time Preferences files and prevent the following daemoms from starting up with iOS. Are you sure you want to continue ?", onOK: {
-                    UIApplication.shared.alert(title: "Removing Screen Time...", body: "Your device will reboot, but I'd recommend you do a manual reboot after the first automatic one.", animated: false, withButton: false)
+            Button("再见，屏幕使用时间！", action : {
+                UIApplication.shared.confirmAlert(title: "你即将禁用这些守护进程。", body: "这将删除屏幕使用时间偏好设置文件，并阻止以下守护进程随 iOS 启动。确定要继续吗？", onOK: {
+                    UIApplication.shared.alert(title: "正在移除屏幕使用时间…", body: "设备将会重启，建议首次自动重启后再手动重启一次。", animated: false, withButton: false)
                     DisableScreenTime(screentimeagentd: ScreenTimeAgent, usagetrackingd: usagetrackingd, homed: homed, familycircled: familycircled)
                 }, noCancel: false, yes: true)
             })
@@ -48,8 +48,8 @@ struct ByeTimeView: View {
             .background(Color.accentColor)
             .cornerRadius(8)
             .foregroundColor(.black)
-            Button("Enable ScreenTime", action : {
-                UIApplication.shared.confirmAlert(title: "You are about to enable back ScreenTime.", body: "This will revert any ScreenTime backup you made and logging will be put back on.", onOK: {
+            Button("启用屏幕使用时间", action : {
+                UIApplication.shared.confirmAlert(title: "你即将重新启用屏幕使用时间。", body: "这将还原你做的所有屏幕使用时间备份，并重新开启日志记录。", onOK: {
                     enableBack()
                 }, noCancel: false, yes: true)
             })

@@ -24,20 +24,20 @@ struct CustomPaths: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Custom Paths")
+                    Text("自定义路径")
                         .font(.title2)
                         .bold()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        UIApplication.shared.confirmAlert(title: "Are you sure you want to erase all your custom paths ?", body: "This won't clean them but will erase them from your list.", onOK: {
+                        UIApplication.shared.confirmAlert(title: "确定要删除所有自定义路径吗？", body: "这不会清理它们，只会从列表中删除。", onOK: {
                             paths = []
                             savePaths()
                         }, noCancel: false)
                     }) {
                         if !paths.isEmpty {
                             withAnimation {
-                                Text("Clear")
+                                Text("清除")
                             }
                         }
                     }
@@ -45,7 +45,7 @@ struct CustomPaths: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         UIApplication.shared.TextFieldAlert(
-                            title: "Enter a path you want to add to your list:",
+                            title: "输入要添加到列表的路径：",
                             textFieldPlaceHolder: "/var/mobile/DCIM/"
                         ) { chemin, _ in
                             if let chemin = chemin, !chemin.isEmpty {
@@ -53,7 +53,7 @@ struct CustomPaths: View {
                                 savePaths()
                                 isAddingPath.toggle()
                             } else {
-                                UIApplication.shared.alert(title: "Empty input !!", body: "Please enter a path.")
+                                UIApplication.shared.alert(title: "输入为空！！", body: "请输入路径。")
                             }
                         }
                     }) {
@@ -69,12 +69,12 @@ struct CustomPaths: View {
             Group {
                 if paths.isEmpty {
                     VStack {
-                        Text("No paths saved.")
+                        Text("暂无已保存的路径。")
                             .foregroundColor(.secondary)
                             .font(.title)
                             .padding()
                             .multilineTextAlignment(.center)
-                        Text("To add a path, tap the + button.")
+                        Text("点击 + 按钮添加路径。")
                             .foregroundColor(.secondary)
                             .font(.footnote)
                             .multilineTextAlignment(.center)
@@ -97,22 +97,22 @@ struct CustomPaths: View {
     @ViewBuilder
     func addPathView() -> some View {
         VStack {
-            Text("Add a New Path")
+            Text("添加新路径")
                 .font(.headline)
                 .padding()
 
-            TextField("Enter path name", text: $newPathName)
+            TextField("输入路径名称", text: $newPathName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 
             HStack {
                 Spacer()
-                Button("Cancel") {
+                Button("取消") {
                     isAddingPath.toggle()
                 }
                 .padding()
 
-                Button("Save") {
+                Button("保存") {
                     if !newPathName.isEmpty {
                         paths.append(newPathName)
                         savePaths()
